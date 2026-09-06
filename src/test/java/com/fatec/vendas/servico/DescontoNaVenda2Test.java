@@ -18,7 +18,7 @@ class DescontoNaVenda2Test {
     }
 
     @Test
-    void ct01_quando_mes_promocional_deveAplicarDesconto() {
+    void ct01_quando_data_mes_promocional_deveAplicarDesconto() {
         // DADO que uma venda é realizada em mês promocional (Novembro)
         String primeiraCompra = "False";
         String dataVenda = "2026-11-15";
@@ -35,7 +35,9 @@ class DescontoNaVenda2Test {
         assertEquals(new BigDecimal("110.00"), resultado);
 
     }
+    //ct02 quando data mes nao promocional nao deve aplicar desconto
 
+    //ct03 data data invalida rejeitar transacao 
     
      @Test
     void ct04_quando_data_em_branco_rejeitar_transacao() {
