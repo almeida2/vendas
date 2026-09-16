@@ -19,7 +19,7 @@ public class DescontoNaVenda {
 
     private static final BigDecimal FRETE_FIXO = new BigDecimal("20.00");
     private static final BigDecimal FRETE_GRATIS = new BigDecimal("0.00");
-     Logger logger = LogManager.getLogger(this.getClass());
+    Logger logger = LogManager.getLogger(this.getClass());
 
     /**
      * Valida os atributos de entrada e calcula o valor final da venda considerando
@@ -41,9 +41,7 @@ public class DescontoNaVenda {
             String primeiraCompraStr,
             String dataVendaStr,
             String valorTotalStr,
-            String valorFreteStr
-        ) {
-        
+            String valorFreteStr) {
 
         // 1. Validação do Atributo: Primeira Compra
         boolean ePrimeiraCompra = validarEConverterPrimeiraCompra(primeiraCompraStr);
@@ -60,13 +58,14 @@ public class DescontoNaVenda {
 
         // 5. Validação das Regras do Mês Promocional
         BigDecimal percentualDescontoPromocional = BigDecimal.ZERO;
-         BigDecimal percentualDescontoTotal = BigDecimal.ZERO;
+        BigDecimal percentualDescontoTotal = BigDecimal.ZERO;
         boolean isMesPromocional = MESES_PROMOCIONAIS.contains(dataVenda.getMonth());
         logger.info(">>>>>> Executando o servico de desconto com os seguintes atributos: " + "mes promocional=>"
                 + isMesPromocional + " percentual de desconto promocional: "
                 + percentualDescontoPromocional + " primeira compra=>" + ePrimeiraCompra
                 + " data da venda: " + dataVendaStr);
-        // no me promocional o desconto não pode ser maior que 10% e fora do mes promocional o desconto não pode ser maior que 0
+        // no me promocional o desconto não pode ser maior que 10% e fora do mes
+        // promocional o desconto não pode ser maior que 0
         if (isMesPromocional) {
             percentualDescontoPromocional = new BigDecimal("0.10");
             percentualDescontoTotal = percentualDescontoTotal.add(percentualDescontoPromocional);
@@ -86,7 +85,7 @@ public class DescontoNaVenda {
 
     private boolean validarEConverterPrimeiraCompra(String entrada) {
         if (entrada == null || entrada.trim().isEmpty()) {
-            throw new IllegalArgumentException("Primeira compra não pode ser em branco ou vazia.");
+            throw new IllegalArgumentException("Primeira compra não pode estar em branco ou vazia.");
         }
         String valorNormalizado = entrada.trim();
         if ("true".equalsIgnoreCase(valorNormalizado) || "sim".equalsIgnoreCase(valorNormalizado)) {
@@ -147,5 +146,4 @@ public class DescontoNaVenda {
         }
     }
 
-    
 }
