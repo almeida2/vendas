@@ -9,16 +9,16 @@ import org.junit.jupiter.api.Test;
 
 //import com.fatec.vendas.servico.lm_local.DescontoNaVenda2;
 //import com.fatec.vendas.servico.qts.DescontoNaVenda;
-import com.fatec.vendas.servico.ts1.DescontoNaVenda2;
+import com.fatec.vendas.servico.ts1.DescontoNaVenda;
 import static org.junit.jupiter.api.Assertions.*;
 
 class ID01PrimeiraCompraTests {
 
-    private DescontoNaVenda2 descontoNaVenda;
+    private DescontoNaVenda descontoNaVenda;
 
     @BeforeEach
     void setUp() {
-        this.descontoNaVenda = new DescontoNaVenda2();
+        this.descontoNaVenda = new DescontoNaVenda();
     }
 
     @Test
