@@ -1,4 +1,4 @@
-package com.fatec.vendas.servico;
+package com.fatec.vendas.servico.llm_n;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
@@ -64,7 +64,7 @@ public class DescontoNaVenda {
                 + isMesPromocional + " percentual de desconto promocional: "
                 + percentualDescontoPromocional + " primeira compra=>" + ePrimeiraCompra
                 + " data da venda: " + dataVendaStr);
-        // no me promocional o desconto não pode ser maior que 10% e fora do mes
+        // no mes promocional o desconto não pode ser maior que 10% e fora do mes
         // promocional o desconto não pode ser maior que 0
         if (isMesPromocional) {
             percentualDescontoPromocional = new BigDecimal("0.10");
@@ -74,6 +74,7 @@ public class DescontoNaVenda {
         }
         // --- Cálculo do Valor Final ---
         if (ePrimeiraCompra) {
+            logger.info(">>>>> Aplicando 5% de desconto por ser primeira compra => " + valorTotal);
             percentualDescontoTotal = percentualDescontoTotal.add(new BigDecimal("0.05"));
         }
 
