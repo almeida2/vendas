@@ -36,6 +36,12 @@ public class DescontoNaVenda3 {
         // 3. aplicar desconto
         BigDecimal valorTotalDecimal = new BigDecimal(valorTotal);
         BigDecimal valorDesconto = valorTotalDecimal.multiply(percentualDesconto);
+        // 4. frete gratis se o valor da compra for >= 200
+        // compareTo ignora diferenças de escala numerica 200.00 = 200.0 = 200
+        if (valorTotalDecimal.compareTo(new BigDecimal("200.00")) >= 0) {
+            logger.info(">> Frete gratis, compra maior ou igual a 200,00");
+            valorFrete = new BigDecimal("0.00");
+        }
         return valorTotalDecimal.subtract(valorDesconto).add(valorFrete).setScale(2, RoundingMode.HALF_UP);
     }
 

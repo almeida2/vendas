@@ -200,7 +200,6 @@ class ID01PrimeiraCompraTests {
         // ENTÃO o valor a pagar considera 5% de desconto => valor total a pagar = (100
         // + 20) - 5 = 115.00
         assertEquals(valorEsperado, valorObtido);
-
     }
 
 }
