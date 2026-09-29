@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 
 public class DescontoNaVenda2 {
+    
     public BigDecimal regraDeDesconto(String primeiraCompra, String dataVenda, String valorTotal) {
         BigDecimal percentualDesconto = BigDecimal.ZERO;
         // 1. validar primeiraCompra (mes nao promocional)
