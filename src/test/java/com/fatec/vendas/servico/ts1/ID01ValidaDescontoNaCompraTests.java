@@ -7,8 +7,6 @@ import org.junit.jupiter.api.BeforeEach;
 
 import org.junit.jupiter.api.Test;
 
-import com.fatec.vendas.servico.qts.DescontoNaVenda;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 class ID01ValidaDescontoNaCompraTests {
