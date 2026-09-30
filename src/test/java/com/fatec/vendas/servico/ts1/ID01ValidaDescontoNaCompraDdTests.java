@@ -12,7 +12,7 @@ public class ID01ValidaDescontoNaCompraDdTests {
     DescontoNaVenda3 descontoNaVenda = new DescontoNaVenda3();
 
     @ParameterizedTest
-    @CsvFileSource(files = "c:/temp/dataset-vendas.csv", numLinesToSkip = 1)
+    @CsvFileSource(files = "c:/temp/vendas-avl.csv", numLinesToSkip = 1)
     void testRegraDeDesconto(int id, String primeiraCompra, String dataCompra, String valorCompra,
             String resultadoEsperado) {
         try {
