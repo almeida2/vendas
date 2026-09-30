@@ -22,9 +22,9 @@ public class DescontoNaVenda2 {
         public BigDecimal regraDeDesconto(String primeiraCompraStr, String dataVendaStr, String valorTotalStr,
                         String valorFreteStr) {
                 BigDecimal valorTotal = new BigDecimal(valorTotalStr); // Convertendo o valor total para BigDecimal
-                BigDecimal valorFrete = new BigDecimal(valorFreteStr); // Convertendo o valor do frete para BigDecimal,
-                                                                       // se
-                                                                       // fornecido
+
+                // se
+                // fornecido
 
                 // Processamento de primeira compra - se primeira compra true? aplica 5% senao
                 // retorna zero

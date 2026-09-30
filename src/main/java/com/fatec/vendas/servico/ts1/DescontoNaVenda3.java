@@ -7,23 +7,20 @@ import java.time.Month;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.time.format.ResolverStyle;
-import java.util.Set;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 public class DescontoNaVenda3 {
     Logger logger = LogManager.getLogger(this.getClass());
-    private static final Set<Month> MESES_PROMOCIONAIS = Set.of(
-            Month.APRIL, Month.MAY, Month.NOVEMBER, Month.DECEMBER);
 
     BigDecimal valorFrete = new BigDecimal("20.00");
 
-    public BigDecimal regraDeDesconto(String primeiraCompra, String dataVenda, String valorTotal) {
+    public BigDecimal regraDeDesconto(String primeiraCompra, String dataVenda, String valorCompra) {
         logger.info(">> Executando servico com os atributos: "
                 + " primeiraCompra: " + primeiraCompra
                 + " dataVenda: " + dataVenda
-                + " valorTotal: " + valorTotal);
+                + " valorCompra: " + valorCompra);
         BigDecimal percentualDesconto = BigDecimal.ZERO;
         // 1. validar primeiraCompra (mes nao promocional)
         if (validarEConverterPrimeiraCompra(primeiraCompra) && !isMesPromocional(dataVenda)) {
@@ -34,28 +31,15 @@ public class DescontoNaVenda3 {
             percentualDesconto = percentualDesconto.add(new BigDecimal("0.10"));
         }
         // 3. aplicar desconto
-        BigDecimal valorTotalDecimal = new BigDecimal(valorTotal);
-        BigDecimal valorDesconto = valorTotalDecimal.multiply(percentualDesconto);
-        // 4. frete gratis se o valor da compra for >= 200
+        BigDecimal valorTotal = new BigDecimal(valorCompra);
+        BigDecimal valorDesconto = valorTotal.multiply(percentualDesconto);
+        // 4. decide o valor do frete - gratis se o valor da compra for >= 200
         // compareTo ignora diferenças de escala numerica 200.00 = 200.0 = 200
-        if (valorTotalDecimal.compareTo(new BigDecimal("200.00")) >= 0) {
+        if (valorTotal.compareTo(new BigDecimal("200.00")) >= 0) {
             logger.info(">> Frete gratis, compra maior ou igual a 200,00");
             valorFrete = new BigDecimal("0.00");
         }
-        return valorTotalDecimal.subtract(valorDesconto).add(valorFrete).setScale(2, RoundingMode.HALF_UP);
-    }
-
-    public boolean validarEConverterPrimeiraCompra(String entrada) {
-        if (entrada == null || entrada.trim().isEmpty()) {
-            throw new IllegalArgumentException("Primeira compra não pode estar em branco ou vazia.");
-        } else {
-            if (entrada.trim().equals("true"))
-                return true;
-            else if (entrada.trim().equals("false"))
-                return false;
-            else
-                throw new IllegalArgumentException("Primeira compra deve ser true ou false.");
-        }
+        return valorTotal.subtract(valorDesconto).add(valorFrete).setScale(2, RoundingMode.HALF_UP);
     }
 
     public boolean isMesPromocional(String dataStr) {
@@ -85,6 +69,19 @@ public class DescontoNaVenda3 {
             return LocalDate.parse(dataStr);
         } catch (DateTimeParseException e) {
             throw new IllegalArgumentException("Data inválida ou em formato incorreto: " + dataStr, e);
+        }
+    }
+
+    public boolean validarEConverterPrimeiraCompra(String entrada) {
+        if (entrada == null || entrada.trim().isEmpty()) {
+            throw new IllegalArgumentException("Primeira compra não pode estar em branco ou vazia.");
+        } else {
+            if (entrada.trim().equals("true"))
+                return true;
+            else if (entrada.trim().equals("false"))
+                return false;
+            else
+                throw new IllegalArgumentException("Primeira compra deve ser true ou false.");
         }
     }
 }
