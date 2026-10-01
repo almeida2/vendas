@@ -7,7 +7,7 @@ import java.math.BigDecimal;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvFileSource;
 
-public class ID01ValidaDescontoNaCompraDdTests {
+public class TUID01ValidaDescontoNaCompraDdTests {
 
     DescontoNaVenda3 descontoNaVenda = new DescontoNaVenda3();
 
@@ -23,7 +23,6 @@ public class ID01ValidaDescontoNaCompraDdTests {
             assertEquals(new BigDecimal(resultadoEsperado), resultadoCalculado);
 
         } catch (IllegalArgumentException e) {
-            System.out.println("Erro ao calcular desconto para o ID: " + id + ": " + e.getMessage());
             assertEquals(resultadoEsperado, e.getMessage());
         }
     }

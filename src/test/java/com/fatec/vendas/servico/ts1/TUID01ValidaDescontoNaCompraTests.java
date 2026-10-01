@@ -9,7 +9,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class ID01ValidaDescontoNaCompraTests {
+class TUID01ValidaDescontoNaCompraTests {
 
     private DescontoNaVenda3 descontoNaVenda;
 
