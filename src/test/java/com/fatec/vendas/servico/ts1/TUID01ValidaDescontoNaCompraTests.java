@@ -80,15 +80,12 @@ class TUID01ValidaDescontoNaCompraTests {
 
         // QUANDO o usuario confirma a operação de compra
         try {
-            descontoNaVenda.regraDeDesconto(
-                    primeiraCompra, dataCompra, valorCompra);
+            descontoNaVenda.regraDeDesconto(primeiraCompra, dataCompra, valorCompra);
+            fail("Deveria falhar com atributo invalido");
         } catch (IllegalArgumentException e) {
-
             // ENTÃO retorna mensagem de erro
-
             assertEquals("Primeira compra não pode estar em branco ou vazia.", e.getMessage());
         }
-
     }
 
     @Test
@@ -100,8 +97,8 @@ class TUID01ValidaDescontoNaCompraTests {
 
         // QUANDO o usuario confirma a operação de compra
         try {
-            descontoNaVenda.regraDeDesconto(
-                    primeiraCompra, dataCompra, valorCompra);
+            descontoNaVenda.regraDeDesconto(primeiraCompra, dataCompra, valorCompra);
+            fail("Deveria falhar com atributo invalido");
         } catch (IllegalArgumentException e) {
             // ENTÃO retorna mensagem de erro
             assertEquals("Primeira compra não pode estar em branco ou vazia.", e.getMessage());
@@ -118,8 +115,8 @@ class TUID01ValidaDescontoNaCompraTests {
 
         // QUANDO o usuario confirma a operação de compra
         try {
-            descontoNaVenda.regraDeDesconto(
-                    primeiraCompra, dataVenda, valorCompra);
+            descontoNaVenda.regraDeDesconto(primeiraCompra, dataVenda, valorCompra);
+            fail("Deveria falhar com atributo invalido");
         } catch (IllegalArgumentException e) {
 
             // ENTÃO retorna mensagem de erro
@@ -139,6 +136,7 @@ class TUID01ValidaDescontoNaCompraTests {
         // QUANDO o usuario confirma a operação de compra
         try {
             descontoNaVenda.regraDeDesconto(primeiraCompra, dataVenda, valorCompra);
+            fail("Deveria falhar com atributo invalido");
         } catch (IllegalArgumentException e) {
             // ENTÃO retorna mensagem de erro
             assertEquals("Primeira compra não pode estar em branco ou vazia.", e.getMessage());
@@ -155,8 +153,8 @@ class TUID01ValidaDescontoNaCompraTests {
 
         // QUANDO o usuario confirma a operação de compra
         try {
-            descontoNaVenda.regraDeDesconto(
-                    primeiraCompra, dataVenda, valorCompra);
+            descontoNaVenda.regraDeDesconto(primeiraCompra, dataVenda, valorCompra);
+            fail("Deveria falhar com atributo invalido");
         } catch (IllegalArgumentException e) {
 
             // ENTÃO retorna mensagem de erro
