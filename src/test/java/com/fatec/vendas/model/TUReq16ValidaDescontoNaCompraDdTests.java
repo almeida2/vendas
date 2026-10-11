@@ -1,4 +1,4 @@
-package com.fatec.vendas.servico.ts1;
+package com.fatec.vendas.model;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -7,12 +7,12 @@ import java.math.BigDecimal;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvFileSource;
 
-public class TUID01ValidaDescontoNaCompraDdTests {
+public class TUReq16ValidaDescontoNaCompraDdTests {
 
-    DescontoNaVenda3 descontoNaVenda = new DescontoNaVenda3();
+    DescontoNaVenda descontoNaVenda = new DescontoNaVenda();
 
     @ParameterizedTest
-    @CsvFileSource(files = "c:/temp/vendas-avl.csv", numLinesToSkip = 1)
+    @CsvFileSource(files = "f:/temp/vendas-avl.csv", numLinesToSkip = 1)
     void testRegraDeDesconto(int id, String primeiraCompra, String dataCompra, String valorCompra,
             String resultadoEsperado) {
         try {

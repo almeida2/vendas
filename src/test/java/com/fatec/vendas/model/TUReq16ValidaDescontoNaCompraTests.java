@@ -1,4 +1,4 @@
-package com.fatec.vendas.servico.ts1;
+package com.fatec.vendas.model;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
@@ -9,13 +9,13 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class TUID01ValidaDescontoNaCompraTests {
+class TUReq16ValidaDescontoNaCompraTests {
 
-    private DescontoNaVenda3 descontoNaVenda;
+    private DescontoNaVenda descontoNaVenda;
 
     @BeforeEach
     void setUp() {
-        this.descontoNaVenda = new DescontoNaVenda3();
+        this.descontoNaVenda = new DescontoNaVenda();
     }
 
     @Test

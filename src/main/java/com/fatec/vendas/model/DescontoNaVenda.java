@@ -1,4 +1,4 @@
-package com.fatec.vendas.servico.ts1;
+package com.fatec.vendas.model;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
@@ -11,7 +11,7 @@ import java.time.format.ResolverStyle;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-public class DescontoNaVenda3 {
+public class DescontoNaVenda {
     Logger logger = LogManager.getLogger(this.getClass());
 
     BigDecimal valorFrete = new BigDecimal("20.00");
