@@ -20,4 +20,8 @@ public class ProdutoService implements IProdutoService {
     public List<Produto> listarTodos() {
         return produtoRepository.findAll();
     }
+
+    public Produto buscarPorId(Long id) {
+        return produtoRepository.findById(id).get();
+    }
 }

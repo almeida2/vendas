@@ -7,4 +7,6 @@ public interface IProdutoService {
     Produto cadastrarProduto(Produto produto);
 
     List<Produto> listarTodos();
+
+    Produto buscarPorId(Long id);
 }
