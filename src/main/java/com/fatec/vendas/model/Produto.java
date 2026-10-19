@@ -1,6 +1,8 @@
 package com.fatec.vendas.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Positive;
 
 @Entity
 @Table(name = "produtos")
@@ -9,13 +11,16 @@ public class Produto {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NotBlank(message = "Nome do produto invalido")
     @Column(nullable = false)
     private String nome;
 
+    @Positive(message = "Preco do produto invalido")
     @Column(nullable = false)
     private double preco;
 
     // atributo para controle de estoque
+    @Positive(message = "Quantidade em estoque do produto invalida")
     @Column(name = "quantidade_estoque", nullable = false)
     private int quantidadeEstoque;
 

@@ -57,7 +57,7 @@ public class DescontoNaVenda {
 
     public LocalDate validarEConverterData(String dataStr) {
         if (dataStr == null || dataStr.trim().isEmpty()) {
-            throw new IllegalArgumentException("Data da venda não pode ser nula, branca ou vazia.");
+            throw new IllegalArgumentException("Data da venda não pode ser nula branca ou vazia.");
         }
         try {
             // Tenta parsing nos formatos ISO (YYYY-MM-DD) ou PT-BR (DD/MM/YYYY)

@@ -12,7 +12,7 @@ public class TUReq16ValidaDescontoNaCompraDdTests {
     DescontoNaVenda descontoNaVenda = new DescontoNaVenda();
 
     @ParameterizedTest
-    @CsvFileSource(files = "c:/temp/vendas-pce.csv", numLinesToSkip = 1)
+    @CsvFileSource(resources = "/desconto_na_venda-pce.csv", numLinesToSkip = 1)
     void testRegraDeDesconto(int id, String primeiraCompra, String dataCompra, String valorCompra,
             String resultadoEsperado) {
         try {

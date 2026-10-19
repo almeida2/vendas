@@ -1,0 +1,12 @@
+id, primeiraCompra, dataCompra, valorCompra, re
+1, true, 2026-01-15, 100.00, 115.00
+2, false, 2026-01-15, 100.00, 120.00
+3, true, 2026-01-15, 250.00, 237.50 
+4, "", 2026-01-15, 100.00,Primeira compra não pode estar em branco ou vazia.
+5, " ", 2026-01-15, 100.00,Primeira compra não pode estar em branco ou vazia.
+6, aaa, 2026-01-15, 100.00,Primeira compra deve ser true ou false.
+7, , 2026-01-15, 100.00,Primeira compra não pode estar em branco ou vazia.
+8,True, 2026-01-15, 100.00,Primeira compra deve ser true ou false.
+9,true, 2026-04-15, 100.00,110.00
+10,true, 2026-01-15, 100.00,115.00
+11,true, , 100.00,Data da venda não pode ser nula branca ou vazia.

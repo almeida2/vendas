@@ -14,8 +14,14 @@ public class ProdutoService implements IProdutoService {
     private IProdutoRepository produtoRepository;
 
     public Produto cadastrarProduto(Produto produto) {
-        if(produto.getNome() == null || produto.getNome().isEmpty()) {
+        if (produto.getNome() == null || produto.getNome().isEmpty()) {
             throw new IllegalArgumentException("Nome do produto invalido");
+        }
+        if (produto.getPreco() == 0 || produto.getPreco() < 0) {
+            throw new IllegalArgumentException("Preco do produto invalido");
+        }
+        if (produto.getQuantidadeEstoque() == 0 || produto.getQuantidadeEstoque() < 0) {
+            throw new IllegalArgumentException("Quantidade em estoque do produto invalida");
         }
         return produtoRepository.save(produto);
     }
