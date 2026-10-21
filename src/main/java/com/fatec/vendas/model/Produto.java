@@ -12,7 +12,7 @@ public class Produto {
     private Long id;
 
     @NotBlank(message = "Codigo do produto invalido")
-    @Column(nullable = false)
+    @Column(nullable = false, unique = true)
     private String codigo;
 
     @NotBlank(message = "Descricao do produto invalida")
