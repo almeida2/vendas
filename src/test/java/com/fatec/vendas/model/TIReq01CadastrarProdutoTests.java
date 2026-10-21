@@ -34,25 +34,42 @@ public class TIReq01CadastrarProdutoTests {
         assertEquals(1, produtoRepository.count());
         var produtoRetornado = produtoRepository.findById(produto.getId()).get();
         assertNotNull(produtoRetornado.getId());
-        assertEquals("Teclado Mecanico", produtoRetornado.getNome());
+        assertEquals("PROD001", produtoRetornado.getCodigo());
+        assertEquals("Teclado Mecanico", produtoRetornado.getDescricao());
         assertEquals(250.00, produtoRetornado.getPreco());
         assertEquals(5, produtoRetornado.getQuantidadeEstoque());
     }
 
     @Test
-    public void ct02_quando_nome_invalido_retorna_excecao() {
+    public void ct02_quando_descricao_invalida_retorna_excecao() {
         // DADO que a informacoes de produto sao invalidas
-        Produto produto = ProdutoTestBuilder.umProduto().comNome("").build();
+        Produto produto = ProdutoTestBuilder.umProduto().comDescricao("").build();
         // QUANDO e ENTÃO o usuário tenta cadastrar o produto
         ConstraintViolationException exception = assertThrows(
                 ConstraintViolationException.class,
                 () -> produtoRepository.saveAndFlush(produto),
-                "Deveria falhar ao cadastrar produto com nome vazio");
+                "Deveria falhar ao cadastrar produto com descricao vazia");
 
         // ENTÃO valida se a mensagem de erro esperada está contida na exceção
         // O Bean Validation encapsula a mensagem dentro de um conjunto de violações.
         boolean contemMensagem = exception.getConstraintViolations().stream()
-                .anyMatch(v -> v.getMessage().equals("Nome do produto invalido"));
+                .anyMatch(v -> v.getMessage().equals("Descricao do produto invalida"));
+
+        assertTrue(contemMensagem, "A mensagem de validação esperada não foi encontrada");
+    }
+
+    @Test
+    public void ct03_quando_codigo_invalido_retorna_excecao() {
+        // DADO que o codigo do produto e invalido
+        Produto produto = ProdutoTestBuilder.umProduto().comCodigo("").build();
+        // QUANDO e ENTÃO o usuário tenta cadastrar o produto
+        ConstraintViolationException exception = assertThrows(
+                ConstraintViolationException.class,
+                () -> produtoRepository.saveAndFlush(produto),
+                "Deveria falhar ao cadastrar produto com codigo vazio");
+
+        boolean contemMensagem = exception.getConstraintViolations().stream()
+                .anyMatch(v -> v.getMessage().equals("Codigo do produto invalido"));
 
         assertTrue(contemMensagem, "A mensagem de validação esperada não foi encontrada");
     }

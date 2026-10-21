@@ -11,9 +11,13 @@ public class Produto {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotBlank(message = "Nome do produto invalido")
+    @NotBlank(message = "Codigo do produto invalido")
     @Column(nullable = false)
-    private String nome;
+    private String codigo;
+
+    @NotBlank(message = "Descricao do produto invalida")
+    @Column(nullable = false)
+    private String descricao;
 
     @Positive(message = "Preco do produto invalido")
     @Column(nullable = false)
@@ -27,16 +31,20 @@ public class Produto {
     public Produto() {
     }
 
-    public Produto(String nome, double preco, int quantidadeEstoque) {
-        this.nome = nome;
-        this.preco = preco;
-        this.quantidadeEstoque = quantidadeEstoque;
+    public Produto(String codigo, String descricao, double preco, int quantidadeEstoque) {
+        setCodigo(codigo);
+        setDescricao(descricao);
+        setPreco(preco);
+        setQuantidadeEstoque(quantidadeEstoque);
     }
 
     // decrementa o estoque se houver saldo
     public void baixarEstoque(int quantidade) {
+        if (quantidade <= 0) {
+            throw new IllegalArgumentException("Quantidade para baixa deve ser maior que zero");
+        }
         if (quantidade > this.quantidadeEstoque) {
-            throw new IllegalArgumentException("Estoque insuficiente para o produto: " + this.nome +
+            throw new IllegalArgumentException("Estoque insuficiente para o produto: " + this.descricao +
                     " (Disponível: " + this.quantidadeEstoque + ", Solicitado: " + quantidade + ")");
         }
         this.quantidadeEstoque -= quantidade;
@@ -48,15 +56,32 @@ public class Produto {
     }
 
     public void setId(Long id) {
+        if (id != null && id <= 0) {
+            throw new IllegalArgumentException("Id do produto invalido");
+        }
         this.id = id;
     }
 
-    public String getNome() {
-        return nome;
+    public String getCodigo() {
+        return codigo;
     }
 
-    public void setNome(String nome) {
-        this.nome = nome;
+    public void setCodigo(String codigo) {
+        if (codigo == null || codigo.trim().isEmpty()) {
+            throw new IllegalArgumentException("Codigo do produto invalido");
+        }
+        this.codigo = codigo;
+    }
+
+    public String getDescricao() {
+        return descricao;
+    }
+
+    public void setDescricao(String descricao) {
+        if (descricao == null || descricao.trim().isEmpty()) {
+            throw new IllegalArgumentException("Descricao do produto invalida");
+        }
+        this.descricao = descricao;
     }
 
     public double getPreco() {
@@ -64,6 +89,9 @@ public class Produto {
     }
 
     public void setPreco(double preco) {
+        if (preco <= 0) {
+            throw new IllegalArgumentException("Preco do produto invalido");
+        }
         this.preco = preco;
     }
 
@@ -72,6 +100,20 @@ public class Produto {
     }
 
     public void setQuantidadeEstoque(int quantidadeEstoque) {
+        if (quantidadeEstoque <= 0) {
+            throw new IllegalArgumentException("Quantidade em estoque do produto invalida");
+        }
         this.quantidadeEstoque = quantidadeEstoque;
+    }
+
+    // Metodos legados para retrocompatibilidade
+    @Deprecated
+    public String getNome() {
+        return this.descricao;
+    }
+
+    @Deprecated
+    public void setNome(String nome) {
+        setDescricao(nome);
     }
 }

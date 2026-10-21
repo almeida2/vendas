@@ -21,8 +21,11 @@ public class VendaService implements IVendasService {
     @Autowired
     private DescontoNaVenda descontoNaVenda;
 
+    Logger logger = LogManager.getLogger(this.getClass());
+
     @Transactional
     public Venda realizarVenda(VendaDTO vendaDTO) {
+        logger.info(">>>>>> vendaservice realizar venda iniciado...");
         Venda novaVenda = new Venda(vendaDTO.getCpf());
 
         for (ItemVendaDTO itemDTO : vendaDTO.getItens()) {

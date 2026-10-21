@@ -12,7 +12,7 @@ public class ItemVendaResponseDTO {
 
     public ItemVendaResponseDTO(ItemVenda item) {
         this.id = item.getId();
-        this.produtoNome = item.getProduto().getNome();
+        this.produtoNome = item.getProduto().getDescricao();
         this.produtoPreco = item.getProduto().getPreco();
         this.quantidade = item.getQuantidade();
         this.subtotal = item.getSubtotal();

@@ -2,12 +2,13 @@ package com.fatec.vendas.servico;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.fail;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import static org.junit.jupiter.api.Assertions.fail;
+
 import com.fatec.vendas.model.Produto;
 
 @SpringBootTest
@@ -19,7 +20,8 @@ public class TIReq01CadastrarProdutoTests {
     @BeforeEach
     public void setup() {
         produto = new Produto();
-        produto.setNome("Teclado Mecanico");
+        produto.setCodigo("PROD001");
+        produto.setDescricao("Teclado Mecanico");
         produto.setPreco(250.00);
         produto.setQuantidadeEstoque(5);
     }
@@ -31,24 +33,37 @@ public class TIReq01CadastrarProdutoTests {
         Produto p = produtoService.cadastrarProduto(produto);
         // ENTAO o produto deve ser salvo no banco de dados
         assertNotNull(p);
-        assertEquals(produto.getNome(), p.getNome());
+        assertEquals(produto.getCodigo(), p.getCodigo());
+        assertEquals(produto.getDescricao(), p.getDescricao());
         assertEquals(produto.getPreco(), p.getPreco());
         assertEquals(produto.getQuantidadeEstoque(), p.getQuantidadeEstoque());
     }
-    
-     @Test
-    public void ct02_quando_nome_invalido_retorna_excecao() {
-        // DADO que as informacoes de produto sao invalidas
-        produto.setNome("");
-        // QUANDO o cadastrado é realizado
+
+    @Test
+    public void ct02_quando_descricao_invalida_retorna_excecao() {
+        // DADO que a descricao do produto e invalida
+        // QUANDO o cadastro ou atribuicao e realizado
         try {
+            produto.setDescricao("");
             produtoService.cadastrarProduto(produto);
-            fail("Deveria falhar com nome invalido");
+            fail("Deveria falhar com descricao invalida");
         } catch (IllegalArgumentException e) {
-            // ENTÃO o produto deve ser salvo no banco de dados
-            assertEquals("Nome do produto invalido", e.getMessage());
+            // ENTÃO a excecao esperada e capturada
+            assertEquals("Descricao do produto invalida", e.getMessage());
         }
     }
-    
 
+    @Test
+    public void ct03_quando_codigo_invalido_retorna_excecao() {
+        // DADO que o codigo do produto e invalido
+        // QUANDO o cadastro ou atribuicao e realizado
+        try {
+            produto.setCodigo("");
+            produtoService.cadastrarProduto(produto);
+            fail("Deveria falhar com codigo invalido");
+        } catch (IllegalArgumentException e) {
+            // ENTÃO a excecao esperada e capturada
+            assertEquals("Codigo do produto invalido", e.getMessage());
+        }
+    }
 }

@@ -23,7 +23,7 @@ import com.fatec.vendas.servico.IProdutoRepository;
  * consumindo a massa de dados do arquivo produtos.csv.
  */
 @DataJpaTest
-public class TIReq01CadastrarProdutoDDTests {
+public class TIValidarCRUDProdutoDDTests {
 
     @Autowired
     IProdutoRepository produtoRepository;
@@ -38,16 +38,17 @@ public class TIReq01CadastrarProdutoDDTests {
      */
     @ParameterizedTest(name = "CT [{0}]: \"{1}\" (R$ {2}, Estoque: {3})")
     @CsvFileSource(resources = "/produtos.csv", numLinesToSkip = 1)
-    void ct01_quando_cadastra_produto_valida_comportamento_das_anotacoes(
-            int id, String nome, double preco, int quantidadeEstoque) {
+    void validacao_do_comportamento_crud_cenarios_validos_invalidos(
+            int id, String codigo, String descricao, double preco, int quantidadeEstoque) {
 
         Produto produto = ProdutoTestBuilder.umProduto()
-                .comNome(nome)
+                .comCodigo(codigo)
+                .comDescricao(descricao)
                 .comPreco(preco)
                 .comQuantidadeEstoque(quantidadeEstoque)
                 .build();
 
-        if (isDadosValidos(nome, preco, quantidadeEstoque)) {
+        if (isDadosValidos(codigo, descricao, preco, quantidadeEstoque)) {
             // ========================================================
             // CENÁRIO VÁLIDO: CREATE, READ, UPDATE, DELETE
             // ========================================================
@@ -56,7 +57,8 @@ public class TIReq01CadastrarProdutoDDTests {
 
             // ENTÃO o produto é cadastrado com ID gerado
             assertNotNull(produtoSalvo.getId(), "O ID do produto deve ser gerado pelo banco");
-            assertEquals(nome, produtoSalvo.getNome());
+            assertEquals(codigo, produtoSalvo.getCodigo());
+            assertEquals(descricao, produtoSalvo.getDescricao());
             assertEquals(preco, produtoSalvo.getPreco());
             assertEquals(quantidadeEstoque, produtoSalvo.getQuantidadeEstoque());
             assertTrue(produtoRepository.existsById(produtoSalvo.getId()));
@@ -66,7 +68,8 @@ public class TIReq01CadastrarProdutoDDTests {
             // 2. READ: Consulta por ID
             Optional<Produto> produtoConsultado = produtoRepository.findById(idGerado);
             assertTrue(produtoConsultado.isPresent(), "O produto cadastrado deve ser encontrado pelo ID");
-            assertEquals(nome, produtoConsultado.get().getNome());
+            assertEquals(codigo, produtoConsultado.get().getCodigo());
+            assertEquals(descricao, produtoConsultado.get().getDescricao());
             assertEquals(preco, produtoConsultado.get().getPreco());
 
             // 3. UPDATE: Atualiza atributos e salva
@@ -91,7 +94,7 @@ public class TIReq01CadastrarProdutoDDTests {
                     "Deveria falhar ao cadastrar produto com dados inválidos");
 
             // ENTÃO valida se a mensagem da anotação violada foi disparada
-            String mensagemEsperada = obterMensagemViolacaoEsperada(nome, preco, quantidadeEstoque);
+            String mensagemEsperada = obterMensagemViolacaoEsperada(codigo, descricao, preco, quantidadeEstoque);
             boolean contemMensagem = exception.getConstraintViolations().stream()
                     .anyMatch(v -> v.getMessage().equals(mensagemEsperada));
 
@@ -103,20 +106,26 @@ public class TIReq01CadastrarProdutoDDTests {
 
     /**
      * Verifica se os dados atendem a todas as anotações da entidade Produto:
-     * - nome: @NotBlank (não nulo e não vazio/em branco)
+     * - codigo: @NotBlank (não nulo e não vazio/em branco)
+     * - descricao: @NotBlank (não nulo e não vazio/em branco)
      * - preco: @Positive (maior que zero)
      * - quantidadeEstoque: @Positive (maior que zero)
      */
-    private boolean isDadosValidos(String nome, double preco, int quantidadeEstoque) {
-        return nome != null && !nome.trim().isEmpty() && preco > 0 && quantidadeEstoque > 0;
+    private boolean isDadosValidos(String codigo, String descricao, double preco, int quantidadeEstoque) {
+        return codigo != null && !codigo.trim().isEmpty() &&
+                descricao != null && !descricao.trim().isEmpty() &&
+                preco > 0 && quantidadeEstoque > 0;
     }
 
     /**
      * Identifica a mensagem de violação esperada de acordo com o atributo inválido.
      */
-    private String obterMensagemViolacaoEsperada(String nome, double preco, int quantidadeEstoque) {
-        if (nome == null || nome.trim().isEmpty()) {
-            return "Nome do produto invalido";
+    private String obterMensagemViolacaoEsperada(String codigo, String descricao, double preco, int quantidadeEstoque) {
+        if (codigo == null || codigo.trim().isEmpty()) {
+            return "Codigo do produto invalido";
+        }
+        if (descricao == null || descricao.trim().isEmpty()) {
+            return "Descricao do produto invalida";
         }
         if (preco <= 0) {
             return "Preco do produto invalido";
