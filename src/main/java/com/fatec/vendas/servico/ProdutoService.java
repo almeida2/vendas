@@ -1,10 +1,13 @@
 package com.fatec.vendas.servico;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
 import com.fatec.vendas.model.Produto;
+
+import jakarta.transaction.Transactional;
 
 @Service
 public class ProdutoService implements IProdutoService {
@@ -38,7 +41,28 @@ public class ProdutoService implements IProdutoService {
         return produtoRepository.findAll();
     }
 
-    public Produto buscarPorId(Long id) {
-        return produtoRepository.findById(id).orElse(null);
+    @Override
+    public Optional<Produto> buscarPorId(Long id) {
+        return produtoRepository.findById(id);
+    }
+
+    @Transactional
+    public Optional<Produto> atualizar(Long id, Produto produtoAtualizado) {
+        return produtoRepository.findById(id).map(produto -> {
+            produto.setCodigo(produtoAtualizado.getCodigo());
+            produto.setDescricao(produtoAtualizado.getDescricao());
+            produto.setPreco(produtoAtualizado.getPreco());
+            produto.setQuantidadeEstoque(produtoAtualizado.getQuantidadeEstoque());
+            return produtoRepository.save(produto);
+        });
+    }
+
+    @Override
+    public boolean deletar(Long id) {
+        if (produtoRepository.existsById(id)) {
+            produtoRepository.deleteById(id);
+            return true;
+        }
+        return false;
     }
 }

@@ -1,6 +1,8 @@
 package com.fatec.vendas.servico;
 
 import java.util.List;
+import java.util.Optional;
+
 import com.fatec.vendas.model.Produto;
 
 public interface IProdutoService {
@@ -8,5 +10,9 @@ public interface IProdutoService {
 
     List<Produto> listarTodos();
 
-    Produto buscarPorId(Long id);
+    Optional<Produto> buscarPorId(Long id);
+
+    Optional<Produto> atualizar(Long id, Produto produto);
+
+    boolean deletar(Long id);
 }
