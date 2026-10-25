@@ -17,7 +17,7 @@ public class ItemVenda {
     @JoinColumn(name = "venda_id", nullable = false)
     private Venda venda;
 
-    @Column(nullable = false)
+    @Column(name = "quantidade", nullable = false)
     private int quantidade;
 
     @Column(name = "subtotal", nullable = false)
