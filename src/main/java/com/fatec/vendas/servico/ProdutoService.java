@@ -67,7 +67,7 @@ public class ProdutoService implements IProdutoService {
         
         List<Produto> produtos = produtoRepository.findAll();
         
-        log.info("Listagem de produtos realizada. Total de registros encontrados: {}", produtos.size());
+        log.info("Listagem de produtos total de registros encontrados: {}", produtos.size());
        
         return produtos;
     }
