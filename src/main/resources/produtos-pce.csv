@@ -1,0 +1,11 @@
+id,codigo,descricao,preco,quantidadeEstoque
+1,COD1,Teclado Mecanico,250.00,10
+2,COD2,Cadeira Gamer,950.55,4
+3,COD3,Mouse Pad,0.01,1
+4,"",Monitor 24,800.00,5
+5,COD5,"",250.00,10
+6,COD6,Mouse Gamer,0.00,25
+7,COD7,Mouse Gamer,-5.00,25
+8,COD8,Headset 7.1,350.00,0
+9,COD9,Headset 7.1,350.00,-1
+10,COD1,Teclado Mecanico RGB,280.00,3
