@@ -17,7 +17,7 @@ import com.fatec.vendas.servico.IProdutoRepository;
 // configurando o contexto necessario para executar testes de repositorios JPA.
 // evitando o custo de carregar a aplicação inteira
 @DataJpaTest
-public class TIManterProdutoTests {
+public class TIManterProdutoCRUDTests {
     // O objetivo principal para validar a integração da classe Produto
     // com o Spring Data JPA Repository, é testar se o mapeamento ORM
     // (anotações de entidade, validações de coluna, IDs) e as consultas SQL
