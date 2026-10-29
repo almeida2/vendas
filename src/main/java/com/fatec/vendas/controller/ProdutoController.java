@@ -6,6 +6,7 @@ import jakarta.validation.Valid;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.springframework.dao.InvalidDataAccessApiUsageException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -60,21 +61,27 @@ public class ProdutoController {
     /**
      * @param id
      * @return ResponseEntity com status HTTP apropriado:
-     *         - HTTP 204 (No Content) se a exclusão for bem-suced
+     *         - HTTP 204 (No Content) se a exclusão for bem-sucedida
+     *         - HTTP 404 (Not Found) se o produto não for encontrado
      */
     @DeleteMapping("/{id}")
     public ResponseEntity<String> deletar(@PathVariable Long id) {
-    try {
-        produtoService.deletar(id);
-        return ResponseEntity.noContent().build(); // HTTP 204
-    } catch (IllegalArgumentException ex) {
-        // Diferencia pelo conteúdo da mensagem ou validação da causa
-        if (ex.getMessage() != null && ex.getMessage().contains("não encontrado")) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ex.getMessage()); // HTTP 404
+        try {
+            logger.info(">>>>>> controller exclusão do produto iniciada ... id= " + id);
+            produtoService.deletar(id);
+            return ResponseEntity.noContent().build(); // HTTP 204
+        } catch (IllegalArgumentException | InvalidDataAccessApiUsageException ex) {
+            logger.info(">>>>>> controller exclusão do produto erro: " + ex.getMessage());
+            String mensagem = ex.getMessage();
+            if (ex.getCause() != null && ex.getCause().getMessage() != null) {
+                mensagem = ex.getCause().getMessage();
+            }
+            if (mensagem != null && mensagem.contains("não encontrado")) {
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body(mensagem); // HTTP 404
+            }
+            return ResponseEntity.badRequest().body(mensagem); // HTTP 400
         }
-        return ResponseEntity.badRequest().body(ex.getMessage()); // HTTP 400
     }
-}
 
     @PutMapping("/{id}")
     public ResponseEntity<Produto> atualizar(@PathVariable Long id, @Valid @RequestBody Produto produto) {

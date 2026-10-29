@@ -13,14 +13,14 @@ import com.fatec.vendas.model.Produto;
 import java.util.Optional;
 
 @SpringBootTest
-public class TIManterProdutoTests {
+public class TIManterProdutoCRUDTests {
     @Autowired
     ProdutoService produtoService;
 
     @Test
     void ct01_quando_informacoes_validas_cadastro_com_sucesso() {
         // DADO que as informacoes de produto sao validas
-        BuilderProduto builderProduto = BuilderProduto.umProduto();    
+        BuilderProduto builderProduto = BuilderProduto.umProduto();
         Produto produto = builderProduto.build();
         // QUANDO o usuario cadastra o produto
         Produto produtoRetornado = produtoService.cadastrarProduto(produto);
@@ -29,18 +29,18 @@ public class TIManterProdutoTests {
         assertEquals("PROD001", produtoRetornado.getCodigo());
         assertEquals("Teclado Mecanico", produtoRetornado.getDescricao());
         assertEquals(250.00, produtoRetornado.getPreco());
-        assertEquals(5,  produtoRetornado.getQuantidadeEstoque());
+        assertEquals(5, produtoRetornado.getQuantidadeEstoque());
     }
 
     @Test
     void ct02_quando_informacoes_validas_retorna_os_detalhes_a_consulta() {
-       // DADO que a informacoes de produto sao validas
-        BuilderProduto builderProduto = BuilderProduto.umProduto();    
+        // DADO que a informacoes de produto sao validas
+        BuilderProduto builderProduto = BuilderProduto.umProduto();
         Produto produto = builderProduto.build();
         Produto produtoRetornado = produtoService.cadastrarProduto(produto);
-         // QUANDO o usuario consulta o produto
-        Optional <Produto> produtoConsultado = produtoService.buscarPorId(produtoRetornado.getId());
-         // ENTÃO os detalhes do produto sao retornados
+        // QUANDO o usuario consulta o produto
+        Optional<Produto> produtoConsultado = produtoService.buscarPorId(produtoRetornado.getId());
+        // ENTÃO os detalhes do produto sao retornados
         assertNotNull(produtoConsultado.get());
         assertEquals("PROD001", produtoConsultado.get().getCodigo());
         assertEquals("Teclado Mecanico", produtoConsultado.get().getDescricao());
