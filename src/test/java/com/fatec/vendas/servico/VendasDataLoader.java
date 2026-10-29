@@ -15,7 +15,7 @@ import org.springframework.stereotype.Component;
 import com.fatec.vendas.model.Venda;
 
 @Component
-public class DataLoader implements CommandLineRunner {
+public class VendasDataLoader implements CommandLineRunner {
 
     @Autowired
     private IVendaRepository vendaRepository;

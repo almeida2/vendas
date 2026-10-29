@@ -34,7 +34,7 @@ public class Venda {
     }
 
     public void adicionarProduto(Produto produto, int quantidade) {
-        ItemVenda item = new ItemVenda(produto, this, quantidade);
+        ItemVenda item = new ItemVenda(produto, quantidade);
         this.itens.add(item);
         this.totalVenda += item.getSubtotal();
     }

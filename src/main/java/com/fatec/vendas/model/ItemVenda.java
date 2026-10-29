@@ -26,9 +26,8 @@ public class ItemVenda {
     public ItemVenda() {
     }
 
-    public ItemVenda(Produto produto, Venda venda, int quantidade) {
+    public ItemVenda(Produto produto, int quantidade) {
         this.produto = produto;
-        this.venda = venda;
         this.quantidade = quantidade;
         this.subtotal = calcularSubtotal();
     }
