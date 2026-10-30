@@ -1,7 +1,6 @@
 package com.fatec.vendas.model;
 
 import jakarta.persistence.*;
-
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.ArrayList;
@@ -10,6 +9,7 @@ import java.util.List;
 @Entity
 @Table(name = "vendas")
 public class Venda {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -18,11 +18,7 @@ public class Venda {
     private List<ItemVenda> itens = new ArrayList<>();
 
     private String cpf;
-
-   
     private LocalDate dataVenda;
-
-    
     private double totalVenda;
 
     public Venda() {
@@ -34,7 +30,11 @@ public class Venda {
     }
 
     public void adicionarProduto(Produto produto, int quantidade) {
+        produto.baixarEstoque(quantidade);
+        
         ItemVenda item = new ItemVenda(produto, quantidade);
+        item.setVenda(this); // Associa o lado "filho" ao lado "pai"
+        
         this.itens.add(item);
         this.totalVenda += item.getSubtotal();
     }
@@ -79,5 +79,4 @@ public class Venda {
     public void setDataVenda(LocalDate dataVenda) {
         this.dataVenda = dataVenda;
     }
-
 }

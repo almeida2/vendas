@@ -100,7 +100,7 @@ public class TIManterProdutoCRUDTests {
                 .body(jsonInvalido)
                 .exchange()
                 // Então (Then): Validação de recusa da requisição (4xx) e integridade do banco
-                .expectStatus().is5xxServerError();
+                .expectStatus().is4xxClientError();
 
         assertEquals(0, produtoRepository.count(), "Nenhum produto inválido deve ser persistido no banco");
     }

@@ -1,10 +1,12 @@
 package com.fatec.vendas.model;
 
+
 import jakarta.persistence.*;
 
 @Entity
 @Table(name = "itens_venda")
 public class ItemVenda {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -33,7 +35,10 @@ public class ItemVenda {
     }
 
     public double calcularSubtotal() {
-        return this.produto.getPreco() * this.quantidade;
+        if (this.produto != null) {
+            return this.produto.getPreco() * this.quantidade;
+        }
+        return 0.0;
     }
 
     // Getters e Setters
@@ -51,6 +56,7 @@ public class ItemVenda {
 
     public void setProduto(Produto produto) {
         this.produto = produto;
+        this.subtotal = calcularSubtotal();
     }
 
     public Venda getVenda() {
@@ -67,6 +73,7 @@ public class ItemVenda {
 
     public void setQuantidade(int quantidade) {
         this.quantidade = quantidade;
+        this.subtotal = calcularSubtotal();
     }
 
     public double getSubtotal() {

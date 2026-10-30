@@ -1,10 +1,13 @@
 package com.fatec.vendas.model;
 
+
+
 import jakarta.persistence.*;
 
 @Entity
 @Table(name = "produtos")
 public class Produto {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -18,16 +21,15 @@ public class Produto {
     }
 
     public Produto(String codigo, String descricao, double preco, int quantidadeEstoque) {
-        this.codigo = codigo;
-        this.descricao = descricao;
-        this.preco = preco;
-        this.quantidadeEstoque = quantidadeEstoque;
+        setCodigo(codigo);
+        setDescricao(descricao);
+        setPreco(preco);
+        setQuantidadeEstoque(quantidadeEstoque);
     }
 
-    // decrementa o estoque se houver saldo
     public void baixarEstoque(int quantidade) {
-        if (quantidade > this.quantidadeEstoque || quantidade == 0) {
-            throw new IllegalArgumentException("Quantidade para baixa de estoque invalida.");
+        if (quantidade <= 0 || quantidade > this.quantidadeEstoque) {
+            throw new IllegalArgumentException("Quantidade para baixa de estoque inválida.");
         }
         this.quantidadeEstoque -= quantidade;
     }
@@ -41,15 +43,15 @@ public class Produto {
         this.id = id;
     }
 
+    public String getCodigo() {
+        return codigo;
+    }
+
     public void setCodigo(String codigo) {
         if (codigo == null || codigo.trim().isEmpty()) {
             throw new IllegalArgumentException("O código do produto não pode ser nulo ou vazio.");
         }
         this.codigo = codigo;
-    }
-
-    public String getCodigo() {
-        return codigo;
     }
 
     public String getDescricao() {
@@ -69,7 +71,7 @@ public class Produto {
 
     public void setPreco(double preco) {
         if (preco <= 0 || Double.isNaN(preco) || Double.isInfinite(preco)) {
-            throw new IllegalArgumentException("Preço do produto invalido.");
+            throw new IllegalArgumentException("Preço do produto inválido.");
         }
         this.preco = preco;
     }
@@ -80,7 +82,7 @@ public class Produto {
 
     public void setQuantidadeEstoque(int quantidadeEstoque) {
         if (quantidadeEstoque <= 0) {
-            throw new IllegalArgumentException("Quantidade para baixa de estoque invalida.");
+            throw new IllegalArgumentException("Quantidade em estoque inválida.");
         }
         this.quantidadeEstoque = quantidadeEstoque;
     }

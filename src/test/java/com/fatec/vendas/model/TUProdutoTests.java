@@ -73,22 +73,22 @@ public class TUProdutoTests {
         IllegalArgumentException exZero = assertThrows(
                 IllegalArgumentException.class,
                 () -> produto.setPreco(0));
-        assertEquals("Preço do produto invalido.", exZero.getMessage());
+        assertEquals("Preço do produto inválido.", exZero.getMessage());
 
         IllegalArgumentException exNegativo = assertThrows(
                 IllegalArgumentException.class,
                 () -> produto.setPreco(-10.0));
-        assertEquals("Preço do produto invalido.", exNegativo.getMessage());
+        assertEquals("Preço do produto inválido.", exNegativo.getMessage());
 
         IllegalArgumentException exNaN = assertThrows(
                 IllegalArgumentException.class,
                 () -> produto.setPreco(Double.NaN));
-        assertEquals("Preço do produto invalido.", exNaN.getMessage());
+        assertEquals("Preço do produto inválido.", exNaN.getMessage());
 
         IllegalArgumentException exInfinito = assertThrows(
                 IllegalArgumentException.class,
                 () -> produto.setPreco(Double.POSITIVE_INFINITY));
-        assertEquals("Preço do produto invalido.", exInfinito.getMessage());
+        assertEquals("Preço do produto inválido.", exInfinito.getMessage());
     }
 
     @Test
@@ -98,12 +98,12 @@ public class TUProdutoTests {
         IllegalArgumentException exZero = assertThrows(
                 IllegalArgumentException.class,
                 () -> produto.setQuantidadeEstoque(0));
-        assertEquals("Quantidade para baixa de estoque invalida.", exZero.getMessage());
+        assertEquals("Quantidade em estoque inválida.", exZero.getMessage());
 
         IllegalArgumentException exNegativo = assertThrows(
                 IllegalArgumentException.class,
                 () -> produto.setQuantidadeEstoque(-5));
-        assertEquals("Quantidade para baixa de estoque invalida.", exNegativo.getMessage());
+        assertEquals("Quantidade em estoque inválida.", exNegativo.getMessage());
     }
 
     @Test
@@ -135,11 +135,11 @@ public class TUProdutoTests {
         IllegalArgumentException exZero = assertThrows(
                 IllegalArgumentException.class,
                 () -> produto.baixarEstoque(0));
-        assertEquals("Quantidade para baixa de estoque invalida.", exZero.getMessage());
+        assertEquals("Quantidade para baixa de estoque inválida.", exZero.getMessage());
 
         IllegalArgumentException exInsuficiente = assertThrows(
                 IllegalArgumentException.class,
                 () -> produto.baixarEstoque(15));
-        assertEquals("Quantidade para baixa de estoque invalida.", exInsuficiente.getMessage());
+        assertEquals("Quantidade para baixa de estoque inválida.", exInsuficiente.getMessage());
     }
 }
