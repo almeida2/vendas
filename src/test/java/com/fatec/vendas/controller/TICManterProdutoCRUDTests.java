@@ -29,7 +29,7 @@ import com.fatec.vendas.util.JsonTestUtils;
  */
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @AutoConfigureRestTestClient
-public class TIManterProdutoCRUDTests {
+public class TICManterProdutoCRUDTests {
 
     private static final String ENDPOINT = "/api/v1/produtos";
 

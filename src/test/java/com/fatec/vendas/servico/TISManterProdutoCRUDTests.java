@@ -3,6 +3,7 @@ package com.fatec.vendas.servico;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -13,11 +14,18 @@ import com.fatec.vendas.model.Produto;
 import java.util.Optional;
 
 @SpringBootTest
-public class TIManterProdutoCRUDTests {
+public class TISManterProdutoCRUDTests {
     @Autowired
     ProdutoService produtoService;
-
+    @Autowired 
+    IProdutoRepository produtoRepository;
+    @BeforeEach 
+    void setup() {
+        // Limpa o repositório antes de cada teste para garantir um estado limpo
+        produtoRepository.deleteAll();
+    }
     @Test
+
     void ct01_quando_informacoes_validas_cadastro_com_sucesso() {
         // DADO que as informacoes de produto sao validas
         BuilderProduto builderProduto = BuilderProduto.umProduto();
