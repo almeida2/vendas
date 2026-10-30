@@ -50,12 +50,20 @@ public class ProdutoController {
 
     @PostMapping
     public ResponseEntity<Produto> salvar(@Valid @RequestBody Produto produto) {
-        Produto produtoSalvo = produtoService.cadastrarProduto(produto);
-        var localizacao = ServletUriComponentsBuilder.fromCurrentRequest()
-                .path("/{id}")
-                .buildAndExpand(produtoSalvo.getId())
-                .toUri();
-        return ResponseEntity.created(localizacao).body(produtoSalvo);
+        try {
+            logger.info(">>>>>> controller cadastro do produto iniciado...");
+            Produto produtoSalvo = produtoService.cadastrarProduto(produto);
+            var localizacao = ServletUriComponentsBuilder.fromCurrentRequest()
+                    .path("/{id}")
+                    .buildAndExpand(produtoSalvo.getId())
+                    .toUri();
+            return ResponseEntity.created(localizacao).body(produtoSalvo);
+        } catch (IllegalArgumentException ex) {
+            logger.info(">>>>>> controller cadastro do produto erro: " + ex.getMessage());
+            return ResponseEntity.badRequest().body(null);
+        }
+        
+       
     }
 
     /**

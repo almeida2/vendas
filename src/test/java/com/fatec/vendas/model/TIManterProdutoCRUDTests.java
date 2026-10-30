@@ -10,6 +10,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.data.jpa.test.autoconfigure.DataJpaTest;
 import java.util.Optional;
+import com.fatec.vendas.util.BuilderProduto;
 
 import com.fatec.vendas.servico.IProdutoRepository;
 

@@ -1,5 +1,5 @@
-package com.fatec.vendas.model;
-
+package com.fatec.vendas.util;
+import com.fatec.vendas.model.Produto;
 
 public class BuilderProduto {
     

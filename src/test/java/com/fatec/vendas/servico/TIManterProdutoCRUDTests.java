@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import com.fatec.vendas.model.BuilderProduto;
+import com.fatec.vendas.util.BuilderProduto;
 import com.fatec.vendas.model.Produto;
 
 import java.util.Optional;

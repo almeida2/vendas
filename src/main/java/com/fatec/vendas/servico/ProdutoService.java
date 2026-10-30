@@ -54,6 +54,13 @@ public class ProdutoService implements IProdutoService {
         }
 
        
+        Optional<Produto> produtoExistente = produtoRepository.findByCodigo(produto.getCodigo());
+        if (produtoExistente.isPresent()) {
+                log.warn("Falha no cadastro: Produto com código {} já existe no repositório", produto.getCodigo());
+              
+                throw new IllegalArgumentException("Produto com codigo " + produto.getCodigo() + " ja existe");
+        }
+        
         Produto novoProduto = produtoRepository.save(produto);
         log.info("Produto cadastrado com sucesso. ID: {}, Código: {}", novoProduto.getId(), novoProduto.getCodigo());
       

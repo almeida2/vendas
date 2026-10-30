@@ -17,7 +17,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.client.RestTestClient;
 
-import com.fatec.vendas.model.BuilderProduto;
+import com.fatec.vendas.util.BuilderProduto;
 import com.fatec.vendas.model.Produto;
 import com.fatec.vendas.servico.IProdutoRepository;
 import com.fatec.vendas.util.JsonTestUtils;

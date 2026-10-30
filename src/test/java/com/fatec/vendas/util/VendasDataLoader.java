@@ -1,4 +1,4 @@
-package com.fatec.vendas.servico;
+package com.fatec.vendas.util;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -13,6 +13,7 @@ import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Component;
 
 import com.fatec.vendas.model.Venda;
+import com.fatec.vendas.servico.IVendaRepository;
 
 @Component
 public class VendasDataLoader implements CommandLineRunner {

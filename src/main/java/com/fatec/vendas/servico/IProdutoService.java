@@ -12,7 +12,7 @@ public interface IProdutoService {
     List<Produto> listarTodos();
 
     Optional<Produto> buscarPorId(Long id);
-
+    
     Optional<Produto> atualizar(Long id, Produto produto);
 
     void deletar(Long id);

@@ -1,5 +1,6 @@
-package com.fatec.vendas.model;
-
+package com.fatec.vendas.util;
+import com.fatec.vendas.model.Produto;
+import com.fatec.vendas.model.Venda;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
