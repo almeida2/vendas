@@ -16,14 +16,16 @@ import java.util.Optional;
 @SpringBootTest
 public class TISManterProdutoCRUDTests {
     @Autowired
-    ProdutoService produtoService;
-    @Autowired 
+    IProdutoService produtoService;
+    @Autowired
     IProdutoRepository produtoRepository;
-    @BeforeEach 
+
+    @BeforeEach
     void setup() {
         // Limpa o repositório antes de cada teste para garantir um estado limpo
         produtoRepository.deleteAll();
     }
+
     @Test
 
     void ct01_quando_informacoes_validas_cadastro_com_sucesso() {
